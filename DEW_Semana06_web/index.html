@@ -80,7 +80,7 @@ function cargarDatos(){
             cuerpo.innerHTML = registros;
         }
 
-        function eliminar(posicion){
+      function eliminar(posicion){
             let codigo = document.getElementById("tbody_datos").rows[posicion].cells[0].innerHTML;
             let opciones  = {
                 method : "DELETE"
@@ -89,35 +89,52 @@ function cargarDatos(){
       
       }
 
+      function editar(posicion){
+        let codigo = document.getElementById("tbody_datos").rows[posicion].cells[0].innerHTML;
+        let titulo = document.getElementById("tbody_datos").rows[posicion].cells[1].innerHTML;
+        let vistas = document.getElementById("tbody_datos").rows[posicion].cells[2].innerHTML;
+
+        document.getElementById("txtCodigo").value = codigo;   
+        document.getElementById("txtTitulo").value = titulo;
+        document.getElementById("txtVistas").value= vistas;     
+      } // fin editar
+
+
   function guardar(posicion) {
-    id = document.getElementById("txtCodigo").value;
-    titulo = document.getElementById("txtTitulo").value;
-    vistas = document.getElementById("txtVistas").value;
-  
-                //OBTENER
-                let opciones  = {
-                method : "POST",
-                body : JSON.stringify({
-                    "codigo": id,
-                    "nombres": nombres,
-                    "apellidos": apellidos,
-                    "documento" : documento
-                })
+                let id = document.getElementById("txtCodigo").value;
+                let  titulo = document.getElementById("txtTitulo").value;
+                let  vistas = document.getElementById("txtVistas").value;
 
-            }
-            fetch("http://localhost:3000/posts", opciones)
-            .then(response => response.text())
-            .then(data=>{
-                let respuesta = JSON.parse(data);
-                console.log (respuesta);
-        });
+                if (id === ""){
+                    alert("Ingrese el ID");
+                }else if(titulo === ""){
+                    alert("Ingrese el titulo");
+                }else if(vistas === ""){
+                    alert("Ingrese el numero de vistas");
+                }else{
+                      let opciones  = {
+                      method : "POST",
+                      body : JSON.stringify({
+                          "id": id,
+                          "title": titulo,
+                          "views": vistas
+                      })
+                    }
 
+                  fetch("http://localhost:3000/posts", opciones)
+                  .then(response => response.text())
+                  .then(data=>{
+                      let respuesta = JSON.parse(data);
+                      console.log (respuesta);
+                      cargarDatos();
+                  });
+                }
   }
 
   function cancelar() {
-    id = document.getElementById("txtCodigo").value = " ";
-    nombres = document.getElementById("txtTitulo").value = " ";
-    apellidos = document.getElementById("txtVistas").value = " ";
+    document.getElementById("txtCodigo").value = "";
+    document.getElementById("txtTitulo").value = "";
+    document.getElementById("txtVistas").value = "";
   }
 
 </script>
