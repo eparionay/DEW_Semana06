@@ -43,13 +43,12 @@
           <thead class="thead-dark">
             <tr>
               <th scope="col">Id</th>
-              <th scope="col">Nombres</th>
-              <th scope="col">Apellidos</th>
-              <th scope="col">Documento</th>
+              <th scope="col">Titulo</th>
+              <th scope="col">Vistas</th>
+              <th scope="col">Opciones</th>
             </tr>
           </thead>
           <tbody id="tbody_datos">
-
           </tbody>
         </table>
       </div>
@@ -76,16 +75,13 @@ function cargarDatos(){
             for(let i=0; i<respuesta.length; i++){
                 registros += `<tr>
                 <td>${respuesta[i].id}</td>
-                <td>${respuesta[i].nombres}</td>
-                <td>${respuesta[i].apellidos}</td>
-                <td>${respuesta[i].documento}</td>
+                <td>${respuesta[i].title}</td>
+                <td>${respuesta[i].views}</td>
                 <td> 
-                  <td>
                     <button type='button' class='btn btn-danger' onclick='eliminar(${i})'>Eliminar</button>
                 </td>`;
             }
             cuerpo.innerHTML = registros;
-        
         }
 
         function eliminar(posicion){
