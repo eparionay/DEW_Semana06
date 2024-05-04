@@ -7,7 +7,10 @@
   <title>Document</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
     integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-</head>
+
+  <link rel="stylesheet" href="assets/css/alertify.css">
+
+  </head>
 
 <body>
 
@@ -81,12 +84,28 @@ function cargarDatos(){
         }
 
       function eliminar(posicion){
-            let codigo = document.getElementById("tbody_datos").rows[posicion].cells[0].innerHTML;
+
+        alertify.confirm('Deseas eliminar ? ', function(){
+          fn_eliminar(posicion);
+           alertify.success('Se elimino correctamente.') 
+          }, function(){
+             alertify.error('Cancel')
+          });
+      }
+
+      function fn_eliminar(posicion){
+        let codigo = document.getElementById("tbody_datos").rows[posicion].cells[0].innerHTML;
             let opciones  = {
                 method : "DELETE"
-        }
-      
-      
+            }
+            console.log("Codigo : " + codigo);
+            fetch("http://localhost:3000/posts/"+ codigo , opciones)
+                  .then(response => response.text())
+                  .then(data=>{
+                      let respuesta = JSON.parse(data);
+                      console.log (respuesta);
+                      cargarDatos();
+                  });
       }
 
       function editar(posicion){
@@ -138,5 +157,8 @@ function cargarDatos(){
   }
 
 </script>
+
+
+<script src="assets/alertify.js"></script>
 
 </html>
