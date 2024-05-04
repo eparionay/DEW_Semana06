@@ -16,21 +16,18 @@
       <div class="col-md-4">
         <form>
           <div class="form-group">
-            <label for="txtCodigo"></label>
+            <label for="txtCodigo">Id</label>
             <input type="text" class="form-control" id="txtCodigo" placeholder="Id">
           </div>
           <div class="form-group">
-            <label for="txtNombre"></label>
-            <input type="text" class="form-control" id="txtNombre" placeholder="Nombres">
+            <label for="txtNombre">Titulo</label>
+            <input type="text" class="form-control" id="txtTitulo" placeholder="Titulo">
           </div>
           <div class="form-group">
-            <label for="txtApellido"></label>
-            <input type="text" class="form-control" id="txtApellido" placeholder="Apellidos">
+            <label for="txtApellido">Vistas</label>
+            <input type="text" class="form-control" id="txtVistas" placeholder="Vistas">
           </div>
-          <div class="form-group">
-            <label for="txtDocumento"></label>
-            <input type="text" class="form-control" id="txtDocumento" placeholder="Documentos">
-          </div>
+         
           <button type="button" class="btn btn-primary" onclick="guardar();">Guardar</button>
           <button type="button" class="btn btn-danger" onclick="cancelar();">Cancelar</button>
         </form>
@@ -94,9 +91,8 @@ function cargarDatos(){
 
   function guardar(posicion) {
     id = document.getElementById("txtCodigo").value;
-    nombres = document.getElementById("txtNombre").value;
-    apellidos = document.getElementById("txtApellido").value;
-    documento = document.getElementById("txtDocumento").value;
+    titulo = document.getElementById("txtTitulo").value;
+    vistas = document.getElementById("txtVistas").value;
   
                 //OBTENER
                 let opciones  = {
@@ -119,14 +115,9 @@ function cargarDatos(){
   }
 
   function cancelar() {
-
     id = document.getElementById("txtCodigo").value = " ";
-    nombres = document.getElementById("txtNombre").value = " ";
-    apellidos = document.getElementById("txtApellido").value = " ";
-    documento = document.getElementById("txtDocumento").value = " ";
-
-
-
+    nombres = document.getElementById("txtTitulo").value = " ";
+    apellidos = document.getElementById("txtVistas").value = " ";
   }
 
 </script>
