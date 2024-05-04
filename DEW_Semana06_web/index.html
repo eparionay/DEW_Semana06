@@ -31,7 +31,6 @@
             <label for="txtDocumento"></label>
             <input type="text" class="form-control" id="txtDocumento" placeholder="Documentos">
           </div>
-
           <button type="button" class="btn btn-primary" onclick="guardar();">Guardar</button>
           <button type="button" class="btn btn-danger" onclick="cancelar();">Cancelar</button>
         </form>
@@ -57,8 +56,8 @@
 
 </body>
 <script type="text/javascript">
+cargarDatos();
 
-  cargarDatos();
 function cargarDatos(){
     fetch("http://localhost:3000/posts")
         .then(response => response.text())
@@ -66,8 +65,7 @@ function cargarDatos(){
             let respuesta = JSON.parse(data);
             mostrarDatos(respuesta);
         });
-
-      }
+}
         function mostrarDatos(respuesta){
           console.log(respuesta);
             let cuerpo = document.getElementById("tbody_datos");
@@ -78,6 +76,7 @@ function cargarDatos(){
                 <td>${respuesta[i].title}</td>
                 <td>${respuesta[i].views}</td>
                 <td> 
+                    <button type='button' class='btn btn-warning' onclick='editar(${i})'>Editar</button>
                     <button type='button' class='btn btn-danger' onclick='eliminar(${i})'>Eliminar</button>
                 </td>`;
             }
@@ -88,32 +87,17 @@ function cargarDatos(){
             let codigo = document.getElementById("tbody_datos").rows[posicion].cells[0].innerHTML;
             let opciones  = {
                 method : "DELETE"
-            }
-
-            fetch("http://localhost:3000/posts/"+codigo, opciones)
-            .then(response => response.text())
-            .then(data=>{
-                let respuesta = JSON.parse(data);
-                console.log (respuesta);
-                cargarDatos(); 
-        });
-
+        }
+      
+      
       }
-
 
   function guardar(posicion) {
     id = document.getElementById("txtCodigo").value;
     nombres = document.getElementById("txtNombre").value;
     apellidos = document.getElementById("txtApellido").value;
     documento = document.getElementById("txtDocumento").value;
-    
-
-    alert("codigo" + id + "\n" +
-      "nombres" + nombres + "\n" +
-      "apellidos" + apellidos + "\n" +
-      "documento" + documento + "\n"
-    );
-
+  
                 //OBTENER
                 let opciones  = {
                 method : "POST",
